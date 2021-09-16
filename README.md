@@ -1,6 +1,6 @@
 # **FLORA: workFLOw for Rnaseq analyses of Amocyst project.**.
 
-[![FLORA version](https://img.shields.io/badge/FLORA%20version-1.0.0-red?labelColor=000000)](https://gitlab.ifremer.fr/cn7ab95/FLORA.git)
+[![FLORA version](https://img.shields.io/badge/FLORA%20version-beta-red?labelColor=000000)](https://gitlab.ifremer.fr/cn7ab95/FLORA.git)
 [![Nextflow](https://img.shields.io/badge/nextflow-%E2%89%A520.10.0-23aa62.svg?labelColor=000000)](https://www.nextflow.io/)
 [![Developer](https://img.shields.io/badge/Developer-Cyril%20NOEL-yellow?labelColor=000000)](https://github.com/cnoel-sebimer)
 
