@@ -7,7 +7,7 @@ process rnaseq_correction {
     publishDir "${params.outdir}/${params.results_dirname}", mode: 'copy', pattern : 'rcorrector.cmd', saveAs : { rcorrector_cmd -> "cmd/${task.process}_complete.sh" }
 
     input:
-        path(fastq)
+        tuple val(id), path(fastq)
 
     output:
         path('*.cor.fq'), emit: fastq_corrected
