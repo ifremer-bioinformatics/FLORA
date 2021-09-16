@@ -6,7 +6,7 @@
 
 ## Introduction
 
-FLORA is a FAIR scalable workflow allowing the analysis of RNAseq data of the AMOCYST project using state-of-the-art transcriptomics tools and statistical methods to conduct reproducible analyses using Nextflow. FLORA starts processing by correct RNAseq raw reads using [Rcorrector](). Then ...
+FLORA is a FAIR scalable workflow allowing the analysis of RNAseq data of the AMOCYST project using state-of-the-art transcriptomics tools and statistical methods to conduct reproducible analyses using Nextflow. FLORA starts processing by correct RNAseq raw reads using [Rcorrector](https://gigascience.biomedcentral.com/articles/10.1186/s13742-015-0089-y). Then uncorrectable reads are removed using a Python script. 
 
 The FLORA workflow is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It automates the mapping of an individual metagenomic sample on a concatenated reference. It is functional on DATARMOR (Ifremer computing cluster) and uses local dependencies.
 
