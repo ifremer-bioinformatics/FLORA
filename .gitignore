@@ -1,3 +1,5 @@
 .nextflow*
 flora_workflow.*
 results/
+00_RawData/
+99_Scripts/
