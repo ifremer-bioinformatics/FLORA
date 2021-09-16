@@ -92,13 +92,14 @@ channel
  */
 
 include { rnaseq_correction } from './modules/rcorrector.nf'
-
+include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
 /*
  * RUN MAIN WORKFLOW
  */
 
 workflow {
     rnaseq_correction(raw_fastq)
+    filter_uncorrectable_fastq(rnaseq_correction.out.fastq_corrected)
 }
 
 /*
