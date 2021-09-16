@@ -10,7 +10,7 @@ process rnaseq_correction {
         tuple val(id), path(fastq)
 
     output:
-        path('*.cor.fq'), emit: fastq_corrected
+        tuple val(id), file('*_R1_001.cor.fq.gz'), file('*_R2_001.cor.fq.gz'), emit: fastq_corrected
         path("rcorrector.cmd"), emit: rcorrector_cmd
 
     script:
