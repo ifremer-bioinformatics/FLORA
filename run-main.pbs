@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#PBS -N flora_workflow
+#PBS -m n
+#PBS -q sequentiel
+#PBS -l mem=10G
+#PBS -l walltime=720:00:00
+
+#activate nextflow environment
+. /appli/bioinfo/nextflow/20.10.0/env.sh
+
+#nextflow temp directory
+export NXF_TEMP=$SCRATCH/.nxf_temp_flora
+mkdir -p $NXF_TEMP
+
+############################################################################################################
+##### THE WORKFLOW USED THE CONF/BASE.CONFIG TO DEFINE THE PARAMETERS FITTING THE AMOCYST PROJECT DATA #####
+############################################################################################################
+cd $PBS_O_WORKDIR
+
+# Running the workflow for the first time
+nextflow run main.nf -c ifremer.config &> flora_workflow.log 2>&1
+
+# Resume a previous analysis to continue it
+#nextflow run main.nf -c ifremer.config -resume &> flora_workflow.log 2>&1
+
+#deactivate nextflow environment and module
+. /appli/bioinfo/nextflow/20.10.0/delenv.sh
