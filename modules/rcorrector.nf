@@ -31,7 +31,7 @@ process filter_uncorrectable_fastq {
         tuple val(id), path(fastq_corrected)
 
     output:
-        tuple val(id), path("*_R{1,2}_001.cor.fq.gz"), emit: fastq_only_corrected
+        tuple val(id), path("corrected_*_R{1,2}_001.cor.fq"), emit: fastq_only_corrected
         path("filter_uncorrectable_fastq.cmd"), emit: filter_uncorrectable_fastq_cmd
 
     script:
