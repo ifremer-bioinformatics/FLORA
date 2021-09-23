@@ -10,7 +10,7 @@ process rnaseq_correction {
         tuple val(id), path(fastq)
 
     output:
-        tuple val(id), file('*_R1_001.cor.fq.gz'), file('*_R2_001.cor.fq.gz'), emit: fastq_corrected
+        tuple val(id), path("*_R{1,2}_001.cor.fq.gz"), emit: fastq_corrected
         path("rcorrector.cmd"), emit: rcorrector_cmd
 
     script:
@@ -31,13 +31,11 @@ process filter_uncorrectable_fastq {
         tuple val(id), path(fastq_corrected)
 
     output:
-        tuple val(id), file('corrected_*_R1_001.cor.fq.gz'), file('corrected_*_R2_001.cor.fq.gz'), emit: fastq_only_corrected
+        tuple val(id), path("*_R{1,2}_001.cor.fq.gz"), emit: fastq_only_corrected
         path("filter_uncorrectable_fastq.cmd"), emit: filter_uncorrectable_fastq_cmd
 
     script:
     """
-    CMD="FilterUncorrectabledPEfastq.py -1 ${fastq_corrected[0]} -2 ${fastq_corrected[1]} -o corrected"
-    echo $CMD > filter_uncorrectable_fastq.cmd
-    eval $CMD &> filter_uncorrectable_fastq_${id}.log 2>&1
+    FilterUncorrectabledPEfastq.sh ${baseDir}/bin/FilterUncorrectabledPEfastq.py ${fastq_corrected[0]} ${fastq_corrected[1]} corrected filter_uncorrectable_fastq.cmd &> filter_uncorrectable_fastq_${id}.log 2>&1
     """
 }
