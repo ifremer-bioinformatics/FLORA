@@ -17,3 +17,5 @@ In this section, we will describe the most important parameters for each process
 ```outdir```: the path to save your results.
 
 ```rawdata```: the path to the RNAseq raw data in FASTQ format for each sample.
+
+```rrna_db```: the path to the bowtie2 index of SILVA rRNA database.

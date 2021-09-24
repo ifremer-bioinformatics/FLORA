@@ -9,6 +9,7 @@
 * [Main arguments](#main-arguments)
 * [Mandatory arguments](#mandatory-arguments)
   * [`--rawdata`](#--rawdata)
+  * [`--rrna_db`](#--rrna_db)
 * [Job resources](#job-resources)
 * [Other command line parameters](#other-command-line-parameters)
   * [`--outdir`](#--outdir)
@@ -89,6 +90,10 @@ git checkout v1.0.0
 ### `--rawdata`
 
 Path to the RNAseq raw data files in FASTQ format.
+
+### `--rrna_db`
+
+Path to the Bowtie2 index of the SILVA rRNA database.
 
 ## Job resources
 
