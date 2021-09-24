@@ -24,6 +24,7 @@ def helpMessage() {
 
 	Mandatory:
 	--rawdata	[path]		Path to the RNAseq raw data.
+        --rrna_db	[path]		Path to a rRNA database to remove them from raw reads.
 			
 	Other options:
 	--outdir [path]			The output directory where the results will be saved.
@@ -71,6 +72,7 @@ summary['Working dir'] = workflow.workDir
 summary['Script dir'] = workflow.projectDir
 summary['User'] = workflow.userName
 summary['RawData path'] = params.rawdata
+summary['rRNA database path'] = params.rrna_db
 
 log.info summary.collect { k,v -> "${k.padRight(18)}: $v" }.join("\n")
 log.info "-\033[91m--------------------------------------------------\033[0m-"
@@ -93,6 +95,8 @@ channel
 
 include { rnaseq_correction } from './modules/rcorrector.nf'
 include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
+include { rrna_removal } from './modules/bowtie2.nf'
+
 /*
  * RUN MAIN WORKFLOW
  */
@@ -100,6 +104,7 @@ include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
 workflow {
     rnaseq_correction(raw_fastq)
     filter_uncorrectable_fastq(rnaseq_correction.out.fastq_corrected)
+    rrna_removal(filter_uncorrectable_fastq.out.fastq_only_corrected)
 }
 
 /*
