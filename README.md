@@ -6,7 +6,7 @@
 
 ## Introduction
 
-FLORA is a FAIR scalable workflow allowing the analysis of RNAseq data of the AMOCYST project using state-of-the-art transcriptomics tools and statistical methods to conduct reproducible analyses using Nextflow. FLORA starts processing by correct RNAseq raw reads using [Rcorrector](https://gigascience.biomedcentral.com/articles/10.1186/s13742-015-0089-y). Then uncorrectable reads are removed using a Python script. 
+FLORA is a FAIR scalable workflow allowing the analysis of RNAseq data of the AMOCYST project using state-of-the-art transcriptomics tools and statistical methods to conduct reproducible analyses using Nextflow. FLORA starts processing by correct RNAseq raw reads using [Rcorrector](https://gigascience.biomedcentral.com/articles/10.1186/s13742-015-0089-y). Then uncorrectable reads are removed using a Python script. rRNA contamination are also removed using [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and the [SILVA database](https://www.arb-silva.de/) before a quality filtering process of the reads using [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/). Finally, the transcriptome assembly is performed using [Trinity](https://github.com/trinityrnaseq/trinityrnaseq) 
 
 The FLORA workflow is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It automates the mapping of an individual metagenomic sample on a concatenated reference. It is functional on DATARMOR (Ifremer computing cluster) and uses local dependencies.
 
@@ -44,7 +44,16 @@ This workflow comes with documentation about the pipeline, found in the `docs/` 
 
 ## Requirements
 
-Upcoming section ...
+To use this workflow, it is necessary to:
+- complete the parameters defined in the[config file](conf/base.config) 
+- to have a SILVA database (SSU + LSU) indexed with Bowtie2
+- to create a file allowing to identify the condition and the replicate of each sample like the following example:
+|   |   |   |   |
+|---|---|---|---|
+|cond_A|cond_A_rep1|reads_A_rep1_R1.fq|reads_A_rep1_R2.fq|
+|cond_A|cond_A_rep2|reads_A_rep2_R1.fq|reads_A_rep2_R2.fq|
+|cond_B|cond_B_rep1|reads_B_rep1_R1.fq|reads_B_rep1_R2.fq|
+|cond_B|cond_B_rep2|reads_B_rep2_R1.fq|reads_B_rep2_R2.fq|
 
 ## Credits
 
