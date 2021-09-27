@@ -13,6 +13,7 @@ process quality_trimming {
 
     output:
         path("trimmed_reads_output/*_trimming_report.txt"), emit: report
+        path("trimmed_reads_output/*val_*.fq.gz"), emit: reads4assembly
         tuple val(id), path("trimmed_reads_output/filtered_rrna_read_*.fq.{1,2}.gz_val_{1,2}.fq.gz"), emit: validate_reads
         path("trimgalore.cmd"), emit: trimgalore_cmd
 
