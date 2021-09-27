@@ -29,6 +29,7 @@ def helpMessage() {
 	--min_quality	[str]		Minimum quality to trim reads.
 	--stringency	[str]		Overlap with adapter sequence required to trim a sequence.
 	--error_rate	[str]		Maximum allowed error rate.
+	--samples_file	[path]		Path to the file describing the condition and replicate ID of each sample used by Trinity.
 			
 	Other options:
 	--outdir [path]			The output directory where the results will be saved.
@@ -101,6 +102,7 @@ include { rnaseq_correction } from './modules/rcorrector.nf'
 include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
 include { rrna_removal } from './modules/bowtie2.nf'
 include { quality_trimming } from './modules/trimgalore.nf'
+include { assembly } from './modules/trinity.nf'
 
 /*
  * RUN MAIN WORKFLOW
@@ -111,6 +113,8 @@ workflow {
     filter_uncorrectable_fastq(rnaseq_correction.out.fastq_corrected)
     rrna_removal(filter_uncorrectable_fastq.out.fastq_only_corrected)
     quality_trimming(rrna_removal.out.filtered_rrna)
+        final_reads = quality_trimming.out.reads4assembly.collect()
+    assembly(final_reads)
 }
 
 /*
