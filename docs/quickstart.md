@@ -19,3 +19,13 @@ In this section, we will describe the most important parameters for each process
 ```rawdata```: the path to the RNAseq raw data in FASTQ format for each sample.
 
 ```rrna_db```: the path to the bowtie2 index of SILVA rRNA database.
+
+```samples_file```: the path to text file a that describes the data (condition, replicate).
+
+```min_length```: the minimum length of kept reads after quality trimming.
+
+```min_quality```: the minimum quality of bases in each reads.
+
+```stringency```: the overlap with adapter sequence required to trim a sequence.
+
+```error_rate```: the maximum allowed error rate.

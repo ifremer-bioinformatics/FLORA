@@ -10,6 +10,11 @@
 * [Mandatory arguments](#mandatory-arguments)
   * [`--rawdata`](#--rawdata)
   * [`--rrna_db`](#--rrna_db)
+  * [`--samples_file`](#--samples_file)
+  * [`--min_length`](#--min_length)
+  * [`--min_quality`](#--min_quality)
+  * [`--stringency`](#--stringency)
+  * [`--error_rate`](#--error_rate)
 * [Job resources](#job-resources)
 * [Other command line parameters](#other-command-line-parameters)
   * [`--outdir`](#--outdir)
@@ -94,6 +99,32 @@ Path to the RNAseq raw data files in FASTQ format.
 ### `--rrna_db`
 
 Path to the Bowtie2 index of the SILVA rRNA database.
+
+### `--samples_file`
+
+Path to text file a that describes the data (condition, replicate) like the following example:
+```bash
+cond_A	cond_A_rep1	reads_A_rep1_R1.fq	reads_A_rep1_R2.fq
+cond_A	cond_A_rep2	reads_A_rep2_R1.fq	reads_A_rep2_R2.fq
+cond_B	cond_B_rep1	reads_B_rep1_R1.fq	reads_B_rep1_R2.fq
+cond_B	cond_B_rep2	reads_B_rep2_R1.fq	reads_B_rep2_R2.fq
+```
+
+### `--min_length`
+
+The minimum length of kept reads after quality trimming.
+
+### `--min_quality`
+
+The minimum quality of bases in each reads.
+
+### `--stringency`
+
+The overlap with adapter sequence required to trim a sequence.
+
+### `--error_rate`
+
+The maximum allowed error rate.
 
 ## Job resources
 
