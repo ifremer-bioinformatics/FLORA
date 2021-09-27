@@ -48,12 +48,12 @@ To use this workflow, it is necessary to:
 - complete the parameters defined in the[config file](conf/base.config) 
 - to have a SILVA database (SSU + LSU) indexed with Bowtie2
 - to create a file allowing to identify the condition and the replicate of each sample like the following example:
-|   |   |   |   |
-|---|---|---|---|
-|cond_A|cond_A_rep1|reads_A_rep1_R1.fq|reads_A_rep1_R2.fq|
-|cond_A|cond_A_rep2|reads_A_rep2_R1.fq|reads_A_rep2_R2.fq|
-|cond_B|cond_B_rep1|reads_B_rep1_R1.fq|reads_B_rep1_R2.fq|
-|cond_B|cond_B_rep2|reads_B_rep2_R1.fq|reads_B_rep2_R2.fq|
+```bash
+cond_A	cond_A_rep1	reads_A_rep1_R1.fq	reads_A_rep1_R2.fq
+cond_A	cond_A_rep2	reads_A_rep2_R1.fq	reads_A_rep2_R2.fq
+cond_B	cond_B_rep1	reads_B_rep1_R1.fq	reads_B_rep1_R2.fq
+cond_B	cond_B_rep2	reads_B_rep2_R1.fq	reads_B_rep2_R2.fq
+```
 
 ## Credits
 
