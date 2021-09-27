@@ -25,6 +25,10 @@ def helpMessage() {
 	Mandatory:
 	--rawdata	[path]		Path to the RNAseq raw data.
         --rrna_db	[path]		Path to a rRNA database to remove them from raw reads.
+	--min_length	[str]		Minimum length to keep read after quality trimming.
+	--min_quality	[str]		Minimum quality to trim reads.
+	--stringency	[str]		Overlap with adapter sequence required to trim a sequence.
+	--error_rate	[str]		Maximum allowed error rate.
 			
 	Other options:
 	--outdir [path]			The output directory where the results will be saved.
@@ -96,6 +100,7 @@ channel
 include { rnaseq_correction } from './modules/rcorrector.nf'
 include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
 include { rrna_removal } from './modules/bowtie2.nf'
+include { quality_trimming } from './modules/trimgalore.nf'
 
 /*
  * RUN MAIN WORKFLOW
@@ -105,6 +110,7 @@ workflow {
     rnaseq_correction(raw_fastq)
     filter_uncorrectable_fastq(rnaseq_correction.out.fastq_corrected)
     rrna_removal(filter_uncorrectable_fastq.out.fastq_only_corrected)
+    quality_trimming(rrna_removal.out.filtered_rrna)
 }
 
 /*
