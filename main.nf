@@ -103,6 +103,7 @@ include { filter_uncorrectable_fastq } from './modules/rcorrector.nf'
 include { rrna_removal } from './modules/bowtie2.nf'
 include { quality_trimming } from './modules/trimgalore.nf'
 include { assembly } from './modules/trinity.nf'
+include { stats_assembly } from './modules/trinity.nf'
 
 /*
  * RUN MAIN WORKFLOW
@@ -115,6 +116,7 @@ workflow {
     quality_trimming(rrna_removal.out.filtered_rrna)
         final_reads = quality_trimming.out.reads4assembly.collect()
     assembly(final_reads)
+    stats_assembly(assembly.out.assembly_fasta)
 }
 
 /*

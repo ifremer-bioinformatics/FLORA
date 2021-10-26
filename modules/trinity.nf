@@ -21,3 +21,24 @@ process assembly {
     assembly.sh ${task.cpus} ${params.samples_file} ${avail_memory}G trinity_assembly.cmd &> trinity_assembly.log 2>&1
     """
 }
+
+process stats_assembly {
+
+    beforeScript '. /appli/bioinfo/trinity/2.8.5/env.sh'
+
+    publishDir "${params.outdir}/${params.results_dirname}/assembly", mode: 'copy', pattern : 'trinity_out_dir.Trinity.fasta'
+    publishDir "${params.outdir}/${params.results_dirname}", mode: 'copy', pattern : 'trinity_assembly.cmd', saveAs : { trinity_assembly_cmd -> "cmd/${task.process}_complete.sh" }
+
+    Input:
+        path(assembly)
+
+    output:
+        path("trinity_assembly_stats.txt"), emit: assembly_stats
+        path("trinity_stats-assembly.cmd"), emit: trinity_stats_assembly_cmd
+
+    script:
+    avail_memory = task.memory.toGiga()
+    """
+    TrinityStats.pl ${assembly} > trinity_assembly_stats.txt
+    """
+}
