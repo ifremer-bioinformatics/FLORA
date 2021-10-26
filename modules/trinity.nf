@@ -3,12 +3,16 @@ process assembly {
     label 'assembly'
     beforeScript '. /appli/bioinfo/trinity/2.8.5/env.sh'
  
+    publishDir "${params.outdir}/${params.results_dirname}/assembly", mode: 'copy', pattern : 'trinity_out_dir.Trinity.fasta'
+    publishDir "${params.outdir}/${params.results_dirname}/assembly", mode: 'copy', pattern : 'trinity_out_dir.Trinity.fasta.gene_trans_map'
     publishDir "${params.outdir}/${params.results_dirname}", mode: 'copy', pattern : 'trinity_assembly.cmd', saveAs : { trinity_assembly_cmd -> "cmd/${task.process}_complete.sh" }
 
     input:
         path(valid_reads)
 
     output:
+        path("trinity_out_dir.Trinity.fasta"), emit: assembly_fasta
+        path("trinity_out_dir.Trinity.fasta.gene_trans_map"), emit: gene_trans_map
         path("trinity_assembly.cmd"), emit: trinity_assembly_cmd
 
     script:
